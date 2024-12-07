@@ -151,11 +151,6 @@ __global__ void ResetKernel(Node *node, int *mutex, int nNodes, int nBodies)
     }
 }
 
-/*
-----------------------------------------------------------------------------------------
-COMPUTE BOUNDING BOX
-----------------------------------------------------------------------------------------
-*/
 __global__ void ComputeBoundingBoxKernel(Node *node, Body *bodies, int *mutex, int nBodies)
 {
 
@@ -207,11 +202,7 @@ __global__ void ComputeBoundingBoxKernel(Node *node, Body *bodies, int *mutex, i
     }
 }
 
-/*
-----------------------------------------------------------------------------------------
-CONSTRUCT QUAD TREE
-----------------------------------------------------------------------------------------
-*/
+
 __device__ int getQuadrant(Vector topLeft, Vector botRight, double x, double y)
 {
 
@@ -456,11 +447,7 @@ __global__ void ConstructQuadTreeKernel(Node *node, Body *bodies, Body *buffer, 
     }
 }
 
-/*
-----------------------------------------------------------------------------------------
-COMPUTE FORCE
-----------------------------------------------------------------------------------------
-*/
+
 __device__ double getDistance(Vector pos1, Vector pos2)
 {
 
@@ -539,12 +526,6 @@ __global__ void ComputeForceKernel(Node *node, Body *bodies, int nNodes, int nBo
         }
     }
 }
-
-
-
-
-
-
 
 
 BarnesHutCuda::BarnesHutCuda(int n) : nBodies(n)
@@ -812,7 +793,6 @@ void BarnesHutCuda::update()
     computeForceCUDA();
     CHECK_LAST_CUDA_ERROR();
 }
-
 
 
 cv::VideoWriter video("nbody.avi", cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), 30, cv::Size(WINDOW_WIDTH, WINDOW_HEIGHT));
